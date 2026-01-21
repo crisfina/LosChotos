@@ -24,7 +24,7 @@ h1 { color: #ff3e00; margin-bottom: 0.5rem; }
 h2 { color: #555; margin-bottom: 1.5rem; }
 
 /* Menú de botones e inputs */
-.menu-botones, .formulario {
+.contenedor-index, .formulario {
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -45,7 +45,7 @@ input:focus {
 /* Estilo de botones */
 .boton, button {
     display: block;
-    background-color: #ff3e00;
+    background-color: lightcoral;
     color: white;
     padding: 12px;
     text-decoration: none;
@@ -58,7 +58,7 @@ input:focus {
 }
 
 .boton:hover, button:hover {
-    background-color: #e63500;
+    background-color: lightcoral;
 }
 
 .boton-secundario {

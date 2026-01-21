@@ -1,18 +1,54 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Reservas - Los Chotos</title>
     <link rel="stylesheet" href="estilos.css">
-    <title>Los chotos</title>
 </head>
 <body>
-    <main>
-        <div id="vista-lista" class="pantalla">
-        <h2>Próximas juergas</h2>
-        <ul id="lista-ul"></ul>
-        <button>Volver</button>
-    </div>
+
+    <main class="contenedor">
+        <h2>Próximas Reservas</h2>
+        
+        <ul id="lista-reservas">
+            <p>Cargando reservas...</p>
+        </ul>
+
+        <a href="index.html" class="boton-secundario">Volver al inicio</a>
     </main>
+
+    <script type="module">
+        // 1. Importamos la conexión central
+        import { db } from './firebase-config.js';
+        // 2. Importamos las funciones para leer (query, onSnapshot, orderBy)
+        import { collection, query, onSnapshot, orderBy } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        const listaUI = document.getElementById('lista-reservas');
+
+        // 3. Creamos una consulta ordenada por fecha
+        const consulta = query(collection(db, "reservas"), orderBy("fecha", "asc"));
+
+        // 4. Escuchamos los cambios en tiempo real
+        onSnapshot(consulta, (snapshot) => {
+            listaUI.innerHTML = ""; // Limpiamos la lista antes de llenarla
+
+            if (snapshot.empty) {
+                listaUI.innerHTML = "<p>No hay reservas todavía.</p>";
+                return;
+            }
+
+            snapshot.forEach((doc) => {
+                const reserva = doc.data();
+                const item = document.createElement('li');
+                item.className = "reserva-item";
+                item.innerHTML = `
+                    <span class="fecha">${reserva.fecha}</span>
+                    <span class="nombre">${reserva.usuario}</span>
+                `;
+                listaUI.appendChild(item);
+            });
+        });
+    </script>
+
 </body>
 </html>

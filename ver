@@ -8,7 +8,11 @@
 </head>
 <body>
     <main>
-        <h1>VER</h1>
+        <div id="vista-lista" class="pantalla">
+        <h2>Próximas juergas</h2>
+        <ul id="lista-ul"></ul>
+        <button>Volver</button>
+    </div>
     </main>
 </body>
 </html>

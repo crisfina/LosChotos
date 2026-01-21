@@ -10,7 +10,6 @@ const firebaseConfig = {
     appId: "1:246176234302:web:35efecf153e7b3e53c0a6f"
 };
 
-// Usamos una variable simple sin 'const' para que no de error al re-declarar
 let app;
 
 if (!getApps().length) {

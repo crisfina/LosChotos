@@ -1,4 +1,4 @@
-/* Configuración general */
+/* ESTILOS GENERALES*/
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #f4f7f6;
@@ -13,19 +13,27 @@ body {
 .contenedor {
     background: white;
     width: 90%;
-    max-width: 400px;
+    height: fit-content;
     padding: 2rem;
     border-radius: 15px;
     box-shadow: 0 10px 25px rgba(0,0,0,0.1);
     text-align: center;
-    gap:20px;
+    gap: 20px;
 }
 
-h1 { color: #540212; margin-bottom: 0.5rem; }
-h2 { color: #555; margin-bottom: 1.5rem; }
+h1 {
+    color: #540212;
+    margin-bottom: 0.5rem;
+}
 
-/* Menú de botones e inputs */
-.menu-botones, .formulario {
+h2 {
+    color: #555;
+    margin-bottom: 1.5rem;
+}
+
+/* MENÚ DE BOTONES E INPUTS*/
+.index,
+.formulario {
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -35,7 +43,7 @@ input {
     padding: 12px;
     border: 1px solid #ddd;
     border-radius: 8px;
-    font-size: 1rem;
+    font-size: 2rem;
     outline: none;
 }
 
@@ -43,8 +51,9 @@ input:focus {
     border-color: #540212;
 }
 
-/* Estilo de botones */
-.boton, button {
+/* BOTONES*/
+.boton,
+button {
     display: block;
     background-color: lightcoral;
     color: white;
@@ -55,11 +64,17 @@ input:focus {
     border: none;
     cursor: pointer;
     font-size: 1rem;
-    transition: background 0.3s;
+    padding: 20px;
 }
 
-.boton:hover, button:hover {
-    background-color: lightcoral;
+.boton:hover,
+button:hover {
+    background-color: rgb(250, 165, 165);
+    transform: scale(1.1);
+}
+
+a{
+    text-decoration: none;
 }
 
 .boton-secundario {
@@ -70,7 +85,7 @@ input:focus {
     font-size: 0.9rem;
 }
 
-/* Lista de reservas */
+/*LISTA DE RESERVAS*/
 #lista-reservas {
     list-style: none;
     padding: 0;
@@ -88,5 +103,69 @@ input:focus {
     border-left: 4px solid #540212;
 }
 
-.fecha { font-weight: bold; color: #540212; }
-.nombre { color: #333; }
+.fecha {
+    font-weight: bold;
+    color: #540212;
+}
+
+.nombre {
+    color: #333;
+}
+
+/* MEDIA QUERY: MÓVIL*/
+@media (max-width: 600px) {
+
+    body {
+        flex-direction: column;
+        padding: 1rem;
+    }
+
+    .contenedor {
+        width: 80vw;
+        padding: 1.5rem;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1rem;
+    }
+
+    .contenedor,
+    .formulario {
+        gap: 12px;
+    }
+
+    .reserva-item {
+        flex-direction: column;
+        gap: 8px;
+    }
+}
+
+/*MEDIA QUERY: WEB*/
+@media (min-width: 900px) {
+
+    body {
+        padding: 2rem;
+    }
+
+    .contenedor {
+        max-width: 50vw;
+        padding: 2.5rem;
+    }
+
+    h1 {
+        font-size: 3rem;
+    }
+
+    h2 {
+        font-size: 2rem;
+    }
+
+    .contenedor,
+    .formulario {
+        gap: 20px;
+    }
+}

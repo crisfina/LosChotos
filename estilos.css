@@ -24,7 +24,7 @@ h1 { color: #ff3e00; margin-bottom: 0.5rem; }
 h2 { color: #555; margin-bottom: 1.5rem; }
 
 /* Menú de botones e inputs */
-.contenedor-index, .formulario {
+.index, .formulario {
     display: flex;
     flex-direction: column;
     gap: 15px;

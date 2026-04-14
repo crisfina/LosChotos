@@ -57,7 +57,6 @@ button {
     display: block;
     background-color: lightcoral;
     color: white;
-    padding: 12px;
     text-decoration: none;
     border-radius: 8px;
     font-weight: bold;
@@ -71,6 +70,10 @@ button {
 button:hover {
     background-color: rgb(250, 165, 165);
     transform: scale(1.1);
+}
+
+.btn-borrar, .btn-editar{
+    padding: 5px;
 }
 
 a{

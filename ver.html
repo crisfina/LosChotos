@@ -20,31 +20,60 @@
     <script type="module">
         // 1. Importamos la conexión central
         import { db } from './firebase-config.js';
-        // 2. Importamos las funciones para leer (query, onSnapshot, orderBy)
-        import { collection, query, onSnapshot, orderBy } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        // 2. Importamos funciones necesarias de Firestore
+        import { 
+            collection, query, onSnapshot, orderBy,
+            deleteDoc, doc, updateDoc 
+        } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
         const listaUI = document.getElementById('lista-reservas');
 
-        // 3. Creamos una consulta ordenada por fecha
+        // 3. Consulta ordenada por fecha
         const consulta = query(collection(db, "reservas"), orderBy("fecha", "asc"));
 
-        // 4. Escuchamos los cambios en tiempo real
+        // 4. Escuchar cambios en tiempo real
         onSnapshot(consulta, (snapshot) => {
-            listaUI.innerHTML = ""; // Limpiamos la lista antes de llenarla
+            listaUI.innerHTML = "";
 
             if (snapshot.empty) {
                 listaUI.innerHTML = "<p>No hay reservas todavía.</p>";
                 return;
             }
 
-            snapshot.forEach((doc) => {
-                const reserva = doc.data();
+            snapshot.forEach((docu) => {
+                const reserva = docu.data();
+
                 const item = document.createElement('li');
                 item.className = "reserva-item";
+
                 item.innerHTML = `
                     <span class="fecha">${reserva.fecha}</span>
                     <span class="nombre">${reserva.usuario}</span>
+                    <button class="btn-borrar">🗑️ Borrar</button>
+                    <button class="btn-editar">✏️ Editar</button>
                 `;
+
+                // 🗑️ BORRAR
+                item.querySelector('.btn-borrar').addEventListener('click', async () => {
+                    if (confirm("¿Seguro que quieres borrar esta reserva?")) {
+                        await deleteDoc(doc(db, "reservas", docu.id));
+                    }
+                });
+
+                // ✏️ EDITAR
+                item.querySelector('.btn-editar').addEventListener('click', async () => {
+                    const nuevoNombre = prompt("Nuevo nombre:", reserva.usuario);
+                    const nuevaFecha = prompt("Nueva fecha:", reserva.fecha);
+
+                    if (nuevoNombre && nuevaFecha) {
+                        await updateDoc(doc(db, "reservas", docu.id), {
+                            usuario: nuevoNombre,
+                            fecha: nuevaFecha
+                        });
+                    }
+                });
+
                 listaUI.appendChild(item);
             });
         });
